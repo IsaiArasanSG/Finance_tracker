@@ -18,15 +18,20 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping("/addtransaction")
+    @PostMapping("/add-transaction")
     public String addTransaction(@RequestBody TransactionDTO transactionDTO) {
         TransactionEntity entity = new TransactionEntity(transactionDTO);
         Long id = transactionService.addTransaction(entity);
         return id.toString();
     }
 
-    @GetMapping("/gettransactions")
+    @GetMapping("/get-all-transactions")
     public List<TransactionDTO> getTransactions() {
         return transactionService.getAllTransactions();
+    }
+
+    @GetMapping("/get-transaction/{id}")
+    public TransactionDTO getTransactionById(@PathVariable Long id) throws Exception {
+        return transactionService.getTransaction(id);
     }
 }

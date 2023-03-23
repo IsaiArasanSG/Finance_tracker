@@ -21,8 +21,8 @@ public class TransactionService {
         this.transactionDTOMapper = transactionDTOMapper;
     }
 
-    public TransactionEntity getTransaction(Long transactionId) {
-        return transactionRepository.findById(transactionId).get();
+    public TransactionDTO getTransaction(Long transactionId) throws Exception {
+        return transactionDTOMapper.apply(transactionRepository.findById(transactionId).orElseThrow(() -> new Exception("Not Found")));
     }
 
     public Long addTransaction(TransactionEntity transaction) {
