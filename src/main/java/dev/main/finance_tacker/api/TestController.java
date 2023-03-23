@@ -1,4 +1,4 @@
-package dev.mai.finance_tacker.api;
+package dev.main.finance_tacker.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

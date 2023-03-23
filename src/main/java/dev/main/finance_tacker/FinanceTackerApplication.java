@@ -1,4 +1,4 @@
-package dev.mai.finance_tacker;
+package dev.main.finance_tacker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package dev.mai.finance_tacker.api.entity;
+package dev.main.finance_tacker.api.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
