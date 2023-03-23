@@ -19,12 +19,8 @@ public class TransactionController {
     }
 
     @PostMapping("/addtransaction")
-    public String addTransaction(@RequestParam String description,
-                                 @RequestParam Double amount,
-                                 @RequestParam String transactionDate,
-                                 @RequestParam String category,
-                                 @RequestParam String type) {
-        TransactionEntity entity = new TransactionEntity(description, amount, transactionDate, category, type);
+    public String addTransaction(@RequestBody TransactionDTO transactionDTO) {
+        TransactionEntity entity = new TransactionEntity(transactionDTO);
         Long id = transactionService.addTransaction(entity);
         return id.toString();
     }

@@ -1,12 +1,13 @@
 package dev.main.finance_tacker.api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import dev.main.finance_tacker.api.dto.TransactionDTO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -17,25 +18,25 @@ public class TransactionEntity {
 
     @Column(name = "ID")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "AMOUNT")
     private Double amount;
     @Column(name = "TRANSACTION_DATE")
-    private String transactionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date transactionDate;
     @Column(name = "CATEGORY")
     private String category;
     @Column(name = "TYPE")
     private String type;
 
-    public TransactionEntity(String description, Double amount,
-                             String transactionDate, String category,
-                             String type) {
-        this.description = description;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.category = category;
-        this.type = type;
+    public TransactionEntity(TransactionDTO dto) {
+        this.description = dto.description();
+        this.amount = dto.amount();
+        this.transactionDate = dto.transactionDate();
+        this.category = dto.category();
+        this.type = dto.type();
     }
 }
