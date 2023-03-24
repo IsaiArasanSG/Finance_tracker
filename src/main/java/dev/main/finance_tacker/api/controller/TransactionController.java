@@ -3,13 +3,20 @@ package dev.main.finance_tacker.api.controller;
 import dev.main.finance_tacker.api.dto.TransactionDTO;
 import dev.main.finance_tacker.api.entity.TransactionEntity;
 import dev.main.finance_tacker.api.service.TransactionService;
+import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class TransactionController {
+
+    private final Logger logger = LoggerFactory.getLogger(TransactionService.class) ;
 
     private final TransactionService transactionService;
 
@@ -19,19 +26,26 @@ public class TransactionController {
     }
 
     @PostMapping("/add-transaction")
-    public String addTransaction(@RequestBody TransactionDTO transactionDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addTransaction(@RequestBody TransactionDTO transactionDTO) {
         TransactionEntity entity = new TransactionEntity(transactionDTO);
-        Long id = transactionService.addTransaction(entity);
-        return id.toString();
+        transactionService.addTransaction(entity);
     }
 
     @GetMapping("/get-all-transactions")
+    @ResponseStatus(HttpStatus.OK)
     public List<TransactionDTO> getTransactions() {
         return transactionService.getAllTransactions();
     }
 
     @GetMapping("/get-transaction/{id}")
-    public TransactionDTO getTransactionById(@PathVariable Long id) throws Exception {
-        return transactionService.getTransaction(id);
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> getTransactionById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(transactionService.getTransaction(id));
+        } catch (EntityNotFoundException e){
+            logger.error("Entity with Id {} not found", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Entity with Id is not available");
+        }
     }
 }

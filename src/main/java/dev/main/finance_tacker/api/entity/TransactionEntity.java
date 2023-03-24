@@ -1,6 +1,7 @@
 package dev.main.finance_tacker.api.entity;
 
 import dev.main.finance_tacker.api.dto.TransactionDTO;
+import dev.main.finance_tacker.api.enums.TypeEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class TransactionEntity {
     @Column(name = "CATEGORY")
     private String category;
     @Column(name = "TYPE")
-    private String type;
+    private TypeEnum type;
 
     public TransactionEntity(TransactionDTO dto) {
         this.description = dto.description();

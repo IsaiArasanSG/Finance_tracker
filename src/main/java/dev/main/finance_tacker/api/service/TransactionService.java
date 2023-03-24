@@ -4,6 +4,7 @@ import dev.main.finance_tacker.api.dto.TransactionDTO;
 import dev.main.finance_tacker.api.entity.TransactionEntity;
 import dev.main.finance_tacker.api.mapper.TransactionDTOMapper;
 import dev.main.finance_tacker.api.repository.TransactionRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,12 @@ public class TransactionService {
         this.transactionDTOMapper = transactionDTOMapper;
     }
 
-    public TransactionDTO getTransaction(Long transactionId) throws Exception {
-        return transactionDTOMapper.apply(transactionRepository.findById(transactionId).orElseThrow(() -> new Exception("Not Found")));
+    public TransactionDTO getTransaction(Long transactionId) {
+        return transactionDTOMapper.apply(transactionRepository.findById(transactionId).orElseThrow(EntityNotFoundException::new));
     }
 
-    public Long addTransaction(TransactionEntity transaction) {
-        return transactionRepository.save(transaction).getId();
+    public void addTransaction(TransactionEntity transaction) {
+        transactionRepository.save(transaction);
     }
 
     public List<TransactionDTO> getAllTransactions() {

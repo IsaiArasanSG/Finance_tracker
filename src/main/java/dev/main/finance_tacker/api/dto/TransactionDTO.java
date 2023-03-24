@@ -1,5 +1,7 @@
 package dev.main.finance_tacker.api.dto;
 
+import dev.main.finance_tacker.api.enums.TypeEnum;
+
 import java.util.Date;
 
 public record TransactionDTO(
@@ -7,6 +9,6 @@ public record TransactionDTO(
         double amount,
         Date transactionDate,
         String category,
-        String type
+        TypeEnum type
 ) {
 }
