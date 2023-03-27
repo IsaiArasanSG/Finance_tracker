@@ -8,7 +8,8 @@
 - Implement using @ExceptionHandler and Resolver --> Myle
 
 # Big Tasks
-- Add spring Security --> Myle
+- Add User Functionality --> Myle
+  - CRUD API's
 - Create Frontend Components
 - Home Page Data 
   - List Monthly / Daily Transactions
@@ -19,3 +20,4 @@
 - Create / Read Calls
 - Handle exception for no entry
 - Enums for Type
+- Add spring Security
