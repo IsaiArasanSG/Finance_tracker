@@ -10,6 +10,8 @@
 # Big Tasks
 - Add User Functionality --> Myle
   - CRUD API's
+- Add Tests
+- Add Insomnia testablity w/o login
 - Create Frontend Components
 - Home Page Data 
   - List Monthly / Daily Transactions

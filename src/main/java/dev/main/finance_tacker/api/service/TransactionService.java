@@ -23,7 +23,8 @@ public class TransactionService {
     }
 
     public TransactionDTO getTransaction(Long transactionId) {
-        return transactionDTOMapper.apply(transactionRepository.findById(transactionId).orElseThrow(EntityNotFoundException::new));
+        return transactionDTOMapper
+                .apply(transactionRepository.findById(transactionId).orElseThrow(EntityNotFoundException::new));
     }
 
     public void addTransaction(TransactionEntity transaction) {
